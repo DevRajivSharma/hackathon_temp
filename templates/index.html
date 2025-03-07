@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create User</title>
+</head>
+<body>
+    <h2>Create User</h2>
+    
+        {% if user %}
+            
+        {% for u in user %}
+        <p>Username: {{ u.username }}</p>
+        <p>Email: {{ u.email }}</p>
+        <img src="{{ u.profile_image.url }}" alt="Profile Image" style="width: 100px; height: 100px;">
+        {% endfor %}
+        
+        {% endif %}
+        
+    
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label>Username:</label>
+        <input type="text" name="username" required><br><br>
+
+        <label>Password:</label>
+        <input type="password" name="password" required><br><br>
+
+        <label>Email:</label>
+        <input type="email" name="email" required><br><br>
+
+        <label>Profile Image:</label>
+        <input type="file" name="profile_image"><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+    
+    {% if message %}
+        <p style="color: green;">{{ message }}</p>
+    {% endif %}
+</body>
+</html>
